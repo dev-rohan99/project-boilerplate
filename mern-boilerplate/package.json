@@ -10,7 +10,7 @@
     "start": "cd backend && node server.js",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "cd frontend && npm run preview",
-    "install-all": "concurrently \"npm install\" \"cd frontend && npm install --legacy-peer-deps\" \"cd backend && npm install\""
+    "install-all": "concurrently \"npm install\" \"cd frontend && npm install\" \"cd backend && npm install\""
   },
   "keywords": [],
   "author": "",
