@@ -6,21 +6,16 @@ import PrivateGuard from "./PrivateGuard";
 
 const privateRouter = [
     {
-        element: <DefaultLayout/>,
+        element: <PrivateGuard/>,
         children: [
             {
-                element: <PrivateGuard/>,
-                children: [
-                    {
-                        path: "/",
-                        element: <Home />
-                    },
-                    {
-                        path: "/profile-update",
-                        element: <UserProfile />
-                    },
-                ]
-            }
+                path: "/",
+                element: <Home />
+            },
+            {
+                path: "/profile-update",
+                element: <UserProfile />
+            },
         ]
     }
 ];
