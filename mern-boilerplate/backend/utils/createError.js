@@ -7,5 +7,4 @@ const createError = (status, msg) => {
 
 }
 
-
 export default createError;
