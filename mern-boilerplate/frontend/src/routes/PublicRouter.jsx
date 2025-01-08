@@ -1,3 +1,4 @@
+import AccountActivationCode from "../pages/account-activation-code/AccountActivationCode";
 import AccountActivation from "../pages/account-activation/AccountActivation";
 import ForgotPassword from "../pages/forgot-password/ForgotPassword";
 import Login from "../pages/login/Login";
@@ -28,6 +29,10 @@ const PublicRouter = [
             {
                 path: "/account-activation",
                 element: <AccountActivation />
+            },
+            {
+                path: "/account-activation-with-code",
+                element: <AccountActivationCode />
             },
         ]
     }

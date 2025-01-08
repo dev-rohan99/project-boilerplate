@@ -1,21 +1,30 @@
 import { useState } from 'react';
 import { FiLock } from 'react-icons/fi';
 import toast from 'react-hot-toast';
+import useInputControl from '../../hooks/useInputControl';
+import { useDispatch } from "react-redux";
+import { resetPassword } from '../../redux/features/auth/authApiSlice';
 
 export default function ResetPassword() {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const { input, setInput, handleInputChange, resetForm } = useInputControl({
+    password: "",
+    confirmPassword: ""
+  });
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!password || !confirmPassword) {
+    if (!input.password || !input.confirmPassword) {
       toast.error('Please fill in all fields');
       return;
     }
-    if (password !== confirmPassword) {
+    if (input.password !== input.confirmPassword) {
       toast.error('Passwords do not match');
       return;
     }
+
+    dispatch(resetPassword());
     toast.success('Password reset successful!');
   };
 
@@ -31,8 +40,8 @@ export default function ResetPassword() {
               <FiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={input.password}
+                onChange={handleInputChange}
                 className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter new password"
               />
@@ -45,8 +54,8 @@ export default function ResetPassword() {
               <FiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={input.confirmPassword}
+                onChange={handleInputChange}
                 className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Confirm new password"
               />

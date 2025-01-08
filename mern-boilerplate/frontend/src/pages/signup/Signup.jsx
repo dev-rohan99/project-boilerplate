@@ -2,18 +2,27 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiUser, FiMail, FiLock } from 'react-icons/fi';
 import toast from 'react-hot-toast';
+import useInputControl from '../../hooks/useInputControl';
 
 export default function Signup() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+  const { input, setInput, handleInputChange, resetForm } = useInputControl({
+    name: "",
+    email: "",
+    password: ""
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !email || !password) {
+    if (!input.name || !input.email || !input.password) {
       toast.error('Please fill in all fields');
       return;
     }
+    setInput({
+      name: "",
+      email: "",
+      password: ""
+    })
     toast.success('Account created successfully!');
   };
 
@@ -29,8 +38,9 @@ export default function Signup() {
               <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                name="name"
+                value={input.name}
+                onChange={handleInputChange}
                 className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter your name"
               />
@@ -43,8 +53,9 @@ export default function Signup() {
               <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name='email'
+                value={input.email}
+                onChange={handleInputChange}
                 className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter your email"
               />
@@ -57,8 +68,9 @@ export default function Signup() {
               <FiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                value={input.password}
+                onChange={handleInputChange}
                 className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Choose a password"
               />
